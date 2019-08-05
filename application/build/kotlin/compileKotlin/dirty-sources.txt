@@ -1,0 +1,8 @@
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\Application.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\data\DefaultDataCreator.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\scheduled\RunEndpointsTask.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\web\cache\CacheConfiguration.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\web\controller\BooksController.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\web\dto\Book.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\web\dto\BookStatus.kt
+C:\JD\payments\pl.ph.spring.caching\application\src\main\kotlin\com\aanu\books\manageer\web\repository\JpaRepository.kt
