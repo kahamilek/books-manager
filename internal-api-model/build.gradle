@@ -1,0 +1,16 @@
+plugins {
+    id("kotlin")
+    id("kotlin-spring")
+    id("io.spring.dependency-management")
+}
+
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+    }
+}

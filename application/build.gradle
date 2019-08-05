@@ -1,0 +1,41 @@
+plugins {
+    id("kotlin")
+    id("kotlin-spring")
+    id("io.spring.dependency-management")
+    id("org.springframework.boot")
+}
+
+dependencies {
+    implementation(project(":internal-api-model"))
+    module(":buildSrc")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("mysql:mysql-connector-java")
+    // ***********************************************************
+    // JACKSON
+    // ***********************************************************
+    implementation("com.fasterxml.jackson.core:jackson-core")
+    implementation("com.fasterxml.jackson.core:jackson-annotations")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    implementation("com.google.guava:guava:$googleGuavaVersion")
+    implementation("com.github.ben-manes.caffeine:caffeine:$benManerCaffeineVersion")
+    implementation("io.github.microutils:kotlin-logging:$kotlinLogging")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$jupiter")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+    }
+}
+sourceCompatibility = jvmTargetVersion
+targetCompatibility = jvmTargetVersion
