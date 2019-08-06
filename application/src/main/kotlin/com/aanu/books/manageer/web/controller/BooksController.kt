@@ -44,6 +44,12 @@ class BooksController(
         return DefaultDataCreator.createBooks(3)
     }
 
+    @GetMapping("/get-books-flux/{}")
+    fun getCountFlux(@PathVariable count: Int): Flux<Book> {
+        logger.info { "Trying to get all books fluxed with thread: ${Thread.currentThread().id}\"" }
+        return DefaultDataCreator.createBooks(count)
+    }
+
     @GetMapping("/get-books-flux-with-variable", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun getAllFluxWithVariable(): Flux<Book> {
         logger.info { "Trying to get all books fluxed with creating variable with thread: ${Thread.currentThread().id}" }
