@@ -1,7 +1,6 @@
 buildscript {
     repositories {
         jcenter()
-        google()
     }
 
     ext{
@@ -20,10 +19,9 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
     }
 }
-
+apply plugin: "kotlin-spring"
 subprojects{
     repositories {
         jcenter()
-        google()
     }
 }

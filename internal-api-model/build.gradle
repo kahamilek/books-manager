@@ -14,3 +14,10 @@ dependencyManagement {
         mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
     }
 }
+
+compileKotlin{
+    targetCompatibility = jvmTargetVersion
+}
+
+sourceCompatibility = jvmTargetVersion
+targetCompatibility = jvmTargetVersion

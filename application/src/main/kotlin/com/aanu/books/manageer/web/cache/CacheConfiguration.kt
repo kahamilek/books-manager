@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration
 import java.util.Arrays.asList
 
 @Configuration
-public open class CacheConfiguration {
+class CacheConfiguration {
 
     companion object CACHE_NAMES{
         const val BOOK_BY_TITLE_CACHE_NAME = "bookByTitle"
@@ -17,7 +17,7 @@ public open class CacheConfiguration {
     }
 
     @Bean
-    open fun cacheConfig(): CacheManager {
+    fun cacheConfig(): CacheManager {
         val cacheManager = SimpleCacheManager()
         cacheManager.setCaches(asList(
             ConcurrentMapCache("bookByTitle"),

@@ -1,14 +1,20 @@
 package com.aanu.books.manageer.web.controller
 
-import mu.KLogging
-import org.springframework.cache.CacheManager
-import org.springframework.web.bind.annotation.*
+import com.aanu.books.manageer.data.DefaultDataCreator
 import com.aanu.books.manageer.web.cache.CacheConfiguration
 import com.aanu.books.manageer.web.dto.Book
 import com.aanu.books.manageer.web.repository.JpaBookRepository
 import com.aanu.books.manager.books.model.BookFromPeriodRequest
 import com.aanu.books.manager.books.model.BookFromPeriodResponse
 import com.aanu.books.manager.books.model.BookWeb
+import mu.KLogging
+import org.springframework.cache.CacheManager
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import reactor.core.publisher.toMono
 
 @RestController
 class BooksController(
@@ -16,20 +22,33 @@ class BooksController(
         private val cacheManager: CacheManager
 ) {
 
-    companion object : KLogging()
+    private val localBooks = mutableListOf<Book>()
 
-   // @Cacheable("bookByTitle")
+
+    // @Cacheable("bookByTitle")
     @GetMapping("/get-by/{title}")
     fun getBookByTitle(@PathVariable title: String): Book {
-       logger.trace { "Get book by title: $title" }
+        logger.trace { "Get book by title: $title" }
         return repository.findByTitle(title)
     }
 
-   // @Cacheable("books")
+    // @Cacheable("books")
     @GetMapping("/get-all")
     fun getAll(): List<Book> {
-        logger.warn { "Find all books: ${repository.findAll()}" }
-        return repository.findAll()
+        return DefaultDataCreator.createBooksNonFlux(3)
+    }
+
+    @GetMapping("/get-books-flux")
+    fun getAllFlux(): Flux<Book> {
+        logger.info { "Trying to get all books fluxed with thread: ${Thread.currentThread().id}\"" }
+        return DefaultDataCreator.createBooks(3)
+    }
+
+    @GetMapping("/get-books-flux-with-variable", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun getAllFluxWithVariable(): Flux<Book> {
+        logger.info { "Trying to get all books fluxed with creating variable with thread: ${Thread.currentThread().id}" }
+        val testVariable = "askdmak"
+        return DefaultDataCreator.createBooks(3)
     }
 
     //@CachePut(value = ["books"])
@@ -39,6 +58,11 @@ class BooksController(
         cacheManager.getCache(CacheConfiguration.BOOK_BY_TITLE_CACHE_NAME)?.put(savedBook.title, savedBook)
         logger.debug { "Add book to cache $savedBook" }
         return savedBook
+    }
+
+    @PostMapping("/books")
+    fun addBook(@RequestBody book: Mono<Book>): Mono<Book> {
+        return book.filter{ localBooks.add(it) }
     }
 
     @GetMapping("/books-by")
@@ -53,11 +77,13 @@ class BooksController(
                 .findAllByCreationDateBetween(
                         request.fromDateInclusive,
                         request.throughDateInclusive
-                ).map{ it.toWeb()}
-        return BookFromPeriodResponse(books = books )
+                ).map { it.toWeb() }
+        return BookFromPeriodResponse(books = books)
     }
 
 }
+
+private val logger = KLogging().logger
 
 private fun Book.toWeb(): BookWeb {
     return BookWeb(
