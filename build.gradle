@@ -1,27 +1,27 @@
-buildscript {
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.3.50" apply true
+    id "org.jetbrains.kotlin.plugin.spring" version "1.3.50" apply false
+    id 'org.springframework.boot' version '2.1.7.RELEASE' apply false
+}
+
+
+ext {
+    kotlinLogging = "1.6.26"
+    benManerCaffeineVersion = "2.7.0"
+    googleGuavaVersion = "21.0"
+    springBootVersion = "2.1.7.RELEASE"
+    jvmTargetVersion = "1.8"
+    kotlinVersion = "1.3.50"
+    jupiter = "5.5.1"
+}
+
+apply plugin: "kotlin-spring"
+subprojects {
     repositories {
         jcenter()
-    }
-
-    ext{
-        kotlinLogging = "1.6.26"
-        benManerCaffeineVersion = "2.7.0"
-        googleGuavaVersion = "21.0"
-        springBootVersion = "2.1.6.RELEASE"
-        jvmTargetVersion = "1.8"
-        kotlinVersion = "1.3.41"
-        jupiter = "5.5.1"
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion")
     }
 }
-apply plugin: "kotlin-spring"
-subprojects{
-    repositories {
-        jcenter()
-    }
+
+repositories {
+    jcenter()
 }

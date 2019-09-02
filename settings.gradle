@@ -1,4 +1,4 @@
 rootProject.name = "books-manager"
 
-include ("application")
-include ("internal-api-model")
+include("application")
+include("internal-api-model")

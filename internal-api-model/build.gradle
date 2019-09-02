@@ -1,7 +1,8 @@
 plugins {
-    id("kotlin")
-    id("kotlin-spring")
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.spring")
     id("io.spring.dependency-management")
+    id('org.springframework.boot')
 }
 
 dependencies {
@@ -15,7 +16,7 @@ dependencyManagement {
     }
 }
 
-compileKotlin{
+compileKotlin {
     targetCompatibility = jvmTargetVersion
 }
 
