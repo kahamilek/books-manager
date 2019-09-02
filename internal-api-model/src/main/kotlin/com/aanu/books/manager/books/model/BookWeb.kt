@@ -2,7 +2,7 @@ package com.aanu.books.manager.books.model
 
 import java.time.LocalDate
 
-data class BookWeb (
+data class BookWeb(
         val id: Long,
         val title: String,
         val creationDate: LocalDate,

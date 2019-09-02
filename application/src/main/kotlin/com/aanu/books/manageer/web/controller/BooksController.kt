@@ -10,11 +10,9 @@ import com.aanu.books.manager.books.model.BookWeb
 import mu.KLogging
 import org.springframework.cache.CacheManager
 import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import reactor.core.publisher.toMono
 
 @RestController
 class BooksController(
@@ -44,9 +42,10 @@ class BooksController(
         return DefaultDataCreator.createBooks(3)
     }
 
-    @GetMapping("/get-books-flux/{}")
+    @GetMapping("/get-books-flux/{count}")
     fun getCountFlux(@PathVariable count: Int): Flux<Book> {
         logger.info { "Trying to get all books fluxed with thread: ${Thread.currentThread().id}\"" }
+        Thread.sleep(1000)
         return DefaultDataCreator.createBooks(count)
     }
 
@@ -68,7 +67,7 @@ class BooksController(
 
     @PostMapping("/books")
     fun addBook(@RequestBody book: Mono<Book>): Mono<Book> {
-        return book.filter{ localBooks.add(it) }
+        return book.filter { localBooks.add(it) }
     }
 
     @GetMapping("/books-by")

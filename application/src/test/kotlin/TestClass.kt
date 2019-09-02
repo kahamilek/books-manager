@@ -4,7 +4,7 @@ import java.io.File
 class TestClass {
 
     @Test
-    fun void(){
+    fun void() {
         val file = File("dlugieeeeee_imieeeeeee.csv")
         val fileContent = "askmdaosmdlanckjncjknaosjdoiajwdoiajwodijaowidjaoiwjdkasdlnzlzllzdknnnvjdnkjn"
 

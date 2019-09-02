@@ -1,11 +1,11 @@
 package com.aanu.books.manageer.scheduled
 
+import com.aanu.books.manageer.data.DefaultDataCreator
+import com.aanu.books.manageer.web.controller.BooksController
+import com.aanu.books.manageer.web.dto.Book
+import mu.KLogging
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Controller
-import com.aanu.books.manageer.data.DefaultDataCreator
-import com.aanu.books.manageer.web.dto.Book
-import com.aanu.books.manageer.web.controller.BooksController
-import mu.KLogging
 
 @Controller
 class RunEndpointsTask(
@@ -20,7 +20,7 @@ class RunEndpointsTask(
 
     @Scheduled(fixedDelay = 10_000)
     fun runAllEndpointsFixed5s() {
-        logger.info { "Jestem w nowym wątku: ${Thread.currentThread().name}"}
+        logger.info { "Jestem w nowym wątku: ${Thread.currentThread().name}" }
 //        bookController.getAll()
 //        bookController.getBookByTitle(CONST_BOOK_TITLE)
 //        bookController.getStartingWith(CONST_BOOK_TITLE)
