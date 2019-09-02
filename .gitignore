@@ -16,7 +16,7 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 /.idea/**
-
+**/out/**
 # Gradle
 /.gradle/**
 
